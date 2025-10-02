@@ -1,0 +1,29 @@
+services:
+  stable-diffusion:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stable-diffusion
+    restart: unless-stopped
+    ports:
+      - "7860:7860"
+    environment:
+      - CLI_ARGS=--api --listen --xformers
+    volumes:
+      - ./models:/opt/stable-diffusion-webui/models/Stable-diffusion
+      - ./outputs:/opt/stable-diffusion-webui/models/outputs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
+    networks:
+      - ai_net
+
+networks:
+  ai_net:
+    external: true
+    name: stable-diffusion_ai_net
