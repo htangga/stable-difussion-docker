@@ -26,4 +26,4 @@ services:
 networks:
   ai_net:
     external: true
-    name: stable-diffusion_ai_net
+    name: ai_net
