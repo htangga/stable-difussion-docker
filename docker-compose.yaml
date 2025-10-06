@@ -8,7 +8,7 @@ services:
     ports:
       - "7860:7860"
     environment:
-      - CLI_ARGS=--api --listen --xformers
+      - CLI_ARGS=--xformers --api --listen --skip-torch-cuda-test --disable-console-progressbars
     volumes:
       - ./models:/opt/stable-diffusion-webui/models/Stable-diffusion
       - ./outputs:/opt/stable-diffusion-webui/models/outputs
